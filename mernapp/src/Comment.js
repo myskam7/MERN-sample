@@ -5,7 +5,7 @@ import marked from 'marked';
 class Comment extends Component {
     rawMarkup() {
         let rawMarkup = marked(this.props.children.toString()); 
-        return {__html: rawMarkuop}; 
+        return {__html: rawMarkup}; 
     }
     render() {
         return (

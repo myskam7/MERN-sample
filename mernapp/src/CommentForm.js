@@ -15,8 +15,8 @@ class CommentForm extends Component {
     handleAuthorChange(e) {
         this.setState({ author: e.target.value });
     }
-    handleTextChange9(e) {
-        this.setState({ text: e.targer.value });
+    handleTextChange(e) {
+        this.setState({ text: e.target.value });
     }
     handleSubmit(e) {
         e.preventDefault();
