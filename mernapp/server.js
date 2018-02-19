@@ -34,6 +34,8 @@ router.get('/', (req, res) => {
     res.json({ message: 'API Initialized!'});
 });
 
+app.use('/api', router);
+
 router.route('/comment')
 .get((req, res) => {
     Comment.find((err, comments) => {
@@ -57,7 +59,7 @@ router.route('/comment')
     });
 });
 
-app.use('/api', router);
+
 
 
 
