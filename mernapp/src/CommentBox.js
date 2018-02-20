@@ -13,6 +13,9 @@ class CommentBox extends Component {
         };
         this.loadCommentFromServer = this.loadCommentFromServer.bind(this);
         this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+        this.handleCommentDelete = this.handleCommentDelete.bind(this);
+        this.handleCommentUpdate = this.handleCommentUpdate.bind(this);
+
     }
     loadCommentFromServer() {
         axios.get(this.props.url)
@@ -31,6 +34,22 @@ class CommentBox extends Component {
             this.setState({ data: comments });
         })
     }
+    handleCommentDelete(id) {
+        axios.delete(`${this.props.url}/${id}`)
+        .then(res => {
+            console.log('Comment deleted');
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
+    handleCommentUpdate(id, comment){
+        axios.put(`${this.props.url}/${id}`, comment)
+        .catch(err => {
+            console.log(err);
+        })
+
+    }
       
     componentDidMount() {
         this.loadCommentFromServer();
@@ -39,8 +58,12 @@ class CommentBox extends Component {
     render() {
         return (
             <div style={ style.CommentBox }>
+            <h2 style={ style.title }>Comments:</h2>
             <h2>Comments</h2>
-            <CommentList data={ this.state.data }/>
+            <CommentList 
+                onCommentDelete={ this.handleCommentDelete }
+                onCommentUpdate={ this.handleCommentUpdate }
+                data={ this.state.data }/>
             <CommentForm onCommentSubmit={ this.handleCommentSubmit} />
             </div>
         )
